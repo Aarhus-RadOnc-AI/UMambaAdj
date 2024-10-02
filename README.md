@@ -1,6 +1,6 @@
 # UMambaAdj: Advancing GTV Segmentation for Head and Neck Cancer in MRI-Guided RT with UMamba and nnU-Net ResEnc Planner
 This repository contains the code and model for UMambaAdj, a hybrid network combining UMamba and nnU-Net Residual Encoder (ResEnc) designed for T2-weighted MRI head and neck tumor segmentation. UMambaAdj leverages the long-range dependency capabilities of the Mamba block and the feature extraction strength of the residual encoder to improve segmentation performance for both GTVp and GTVn. The model was tested on the HNTS-MRG 2024 dataset, achieving enhanced accuracy in boundary delineation and volumetric overlap metrics.
-! [](network_architecture.pdf)
+![network_architecture](network_architecture.pdf)
 ## UMamba Adjustment (UMambaAdj): Enhanced UMamba for Head and Neck Tumor Segmentation
 Folder ```nnUNet``` presents a customized version of nnUNet, optimized for head and neck tumor segmentation (HNTS). We enhance the original UMamba architecture by introducing significant optimizations to improve computational efficiency and segmentation accuracy.
 
