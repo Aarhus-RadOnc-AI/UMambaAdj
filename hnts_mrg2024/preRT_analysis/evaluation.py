@@ -7,15 +7,21 @@ import argparse
 from medpy.metric.binary import hd95, assd
 from scipy.stats import ttest_ind
 
-# Function to compute volumes
-def compute_volumes(im):
-    spacing = im.GetSpacing()
-    voxvol = spacing[0] * spacing[1] * spacing[2]
-    stats = sitk.LabelStatisticsImageFilter()
-    stats.Execute(im, im)
-    nvoxels1 = stats.GetCount(1)
-    nvoxels2 = stats.GetCount(2)
-    return nvoxels1 * voxvol, nvoxels2 * voxvol
+
+"""
+This script evaluates medical image segmentation performance using the Dice Similarity Coefficient (DSC), aggregated DSC, 
+Hausdorff Distance at the 95th percentile (HD95), Mean Surface Distance (MSD), and Hausdorff Distance (HD) 
+for two labels: GTVp (label 1) and GTVn (label 2).
+
+Key components:
+- Computes individual patient metrics (DSC, HD95, MSD, HD) by comparing ground truth and predicted masks.
+- Aggregates these metrics across all patients, calculating mean, median, and percentiles.
+- Multithreaded execution for parallel evaluation of patients.
+- Resamples prediction images if needed to match ground truth dimensions and resolution.
+- Outputs individual patient metrics and aggregated results to a JSON file.
+"""
+
+
 
 """
 The commented-out code relates to the legacy use of MedPy's hd95 and assd (Mean Surface Distance) metrics. 
@@ -53,6 +59,16 @@ To avoid these issues, I now use SimpleITK's SignedMaurerDistanceMap to compute 
 #         print(f"Skipping HD95/MSD for label 2 (GTVn) due to empty groundtruth or prediction for this label.")
 
 #     return hd95_value1, msd_value1, hd95_value2, msd_value2
+
+# Function to compute volumes
+def compute_volumes(im):
+    spacing = im.GetSpacing()
+    voxvol = spacing[0] * spacing[1] * spacing[2]
+    stats = sitk.LabelStatisticsImageFilter()
+    stats.Execute(im, im)
+    nvoxels1 = stats.GetCount(1)
+    nvoxels2 = stats.GetCount(2)
+    return nvoxels1 * voxvol, nvoxels2 * voxvol
 
 
 # Compute HD95 and MSD for both labels using SimpleITK
@@ -294,7 +310,7 @@ def get_intermediate_metrics(patient_ID, groundtruth, prediction):
     # Compute HD95 and MSD for both GTVp (label 1) and GTVn (label 2)
     hd95_value1, msd_value1, hd95_value2, msd_value2, hd_value1,hd_value2 = compute_surface_distances(groundtruth, prediction)#, voxel_spacing)
 
-    # Return all metrics including the new distance metrics
+    # Return all metrics
     return {
         "PatientID": patient_ID,
         "TP1": TP1,
