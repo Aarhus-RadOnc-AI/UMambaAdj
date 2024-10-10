@@ -17,6 +17,10 @@ def compute_volumes(im):
     nvoxels2 = stats.GetCount(2)
     return nvoxels1 * voxvol, nvoxels2 * voxvol
 
+"""
+The commented-out code relates to the legacy use of MedPy's hd95 and assd (Mean Surface Distance) metrics. 
+MedPy occasionally produces errors with some outliers, resulting in extremely large numbers. 
+To avoid these issues, I now use SimpleITK's SignedMaurerDistanceMap to compute the distances directly."""
 # # Compute HD95 and MSD for both labels with voxel spacing
 # def compute_surface_distances(groundtruth, prediction, voxel_spacing):
 #     # Create binary masks for label 1 (GTVp) and label 2 (GTVn)
