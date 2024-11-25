@@ -4,6 +4,9 @@ This repository contains the code and model for UMambaAdj, a hybrid network comb
 ![network_architecture](network_architecture.png)
 UMambaAdj leverages the long-range dependency capabilities of the Mamba block and the feature extraction strength of the residual encoder to improve segmentation performance. The model was tested on the HNTS-MRG 2024 dataset, achieving enhanced accuracy in boundary delineation and volumetric overlap metrics.
 
+The shared model weights are public available at : 
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-ffcc00?style=for-the-badge&logo=huggingface&logoColor=white)](https://huggingface.co/JintaoRen/umambaadj/)
+
 ### Key Modifications of UMamba Adjustment (UMambaAdj)
 - **Removal of the Mamba Layer and Residual Blocks**: We optimize UMamba by removing the Mamba layer in the first block and the residual blocks in the decoder, significantly enhancing computational efficiency while preserving the model's ability to capture long-range dependencies.
 - **Integration with nnU-Net ResEnc**: By combining UMamba’s long-range dependency modeling with nnU-Net ResEnc’s enhanced residual encoding.
