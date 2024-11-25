@@ -1,4 +1,4 @@
-# UMambaAdj: Advancing Medical Image Segmentation with UMamba and nnU-Net ResEnc Planner
+# UMambaAdj: Advancing GTV Segmentation for Head and Neck Cancer in MRI-Guided RT with UMamba and nnU-Net ResEnc Planner
 This repository contains the code and model for UMambaAdj, a hybrid network combining UMamba and nnU-Net Residual Encoder (ResEnc) designed for T2-weighted 3D medical image segmentation. 
 
 ![network_architecture](network_architecture.png)
